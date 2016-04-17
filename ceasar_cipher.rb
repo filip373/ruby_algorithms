@@ -1,26 +1,29 @@
-def ceasar_cipher text, shift
-  up_range = 'A'.ord..'Z'.ord
-  down_range = 'a'.ord..'z'.ord
-  encrypted = ''
+class CeasarCipher
 
-  text.each_byte do |b|
-    if up_range === b
-      enc = b + shift
-      if enc > up_range.last || enc < up_range.first
-        enc = up_range.first + (enc - up_range.last - 1)
+  def encrypt(text, shift)
+    up_range = 'A'.ord..'Z'.ord
+    down_range = 'a'.ord..'z'.ord
+    encrypted = ''
+
+    text.each_byte do |b|
+      if up_range === b
+        enc = b + shift
+        if enc > up_range.last || enc < up_range.first
+          enc = up_range.first + (enc - up_range.last - 1)
+        end
+      elsif down_range === b
+        enc = b + shift
+        if enc > down_range.last || enc < down_range.first
+          enc = down_range.first + (enc - down_range.last - 1)
+        end
+      else
+          enc = b
       end
-    elsif down_range === b
-      enc = b + shift
-      if enc > down_range.last || enc < down_range.first
-        enc = down_range.first + (enc - down_range.last - 1)
-      end
-    else
-        enc = b
+      encrypted << enc.chr
     end
-    encrypted << enc.chr
+    return encrypted
   end
-  return encrypted
-end
 
-string = 'What a string!'
-puts ceasar_cipher string, 19
+end
+# string = 'What a string!'
+# puts ceasar_cipher string, 19
