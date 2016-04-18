@@ -1,14 +1,14 @@
 module Enumerable
 
   def my_each
-    self.length.times do |time|
-      yield self[time]
+    self.size.times do |time|
+      yield self.to_a[time]
     end
   end
 
   def my_each_with_index
-    self.length.times do |time|
-      yield self[time], time
+    self.size.times do |time|
+      yield self.to_a[time], time
     end
   end
 
@@ -38,12 +38,12 @@ module Enumerable
     unless no_arg
       return self.my_select do |elem|
         elem == obj
-      end.length
+      end.size
     end
     if block_given?
-      return self.my_select(&block).length
+      return self.my_select(&block).size
     else
-      return self.length
+      return self.size
     end
   end
 
